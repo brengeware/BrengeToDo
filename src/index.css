@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f3f5;
+  color: #1a1a1a;
+}
+
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: 520px;
+  background: white;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e6e6e6;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.header h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.header p {
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  color: #666;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.input-row input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+}
+
+.input-row input:focus {
+  border-color: #3b82f6;
+}
+
+.button {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.button.primary {
+  background: #2563eb;
+  color: white;
+}
+
+.button.primary:hover {
+  background: #1d4ed8;
+}
+
+.button.light {
+  background: #f4f4f5;
+  color: #111;
+  border: 1px solid #ddd;
+}
+
+.button.light:hover {
+  background: #ededee;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e6e6e6;
+  margin-top: 10px;
+  background: white;
+}
+
+.task:hover {
+  background: #f9fafb;
+}
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.check-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.check-circle.done {
+  background: #22c55e;
+  border-color: #22c55e;
+  color: white;
+}
+
+.task-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.task-text.done {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.small-text {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
