@@ -154,8 +154,9 @@ export default function App() {
       text: darkMode ? "#f5f5f5" : "#111",
       subText: darkMode ? "#bdbdbd" : "#666",
       appBar: darkMode ? "#1b1b1b" : "#2b2b2b",
-      red: "#c70000",
-      redHover: "#a50000",
+      primary: "#4dabf7",      // light blue accent
+      primaryHover: "#339af0", // slightly darker on hover
+
     };
   }, [darkMode]);
 
@@ -353,12 +354,20 @@ export default function App() {
             <MenuIcon />
           </IconButton>
 
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" sx={{ flexGrow: 1,
+          textTransform: "none",
+          fontWeight: 800,
+           }}>
             {appName}
           </Typography>
 
-          <Button color="inherit" onClick={goHome}>
-            Home
+          <Button color="inherit" onClick={goHome}
+          sx={{
+            textTransform: "none",
+            fontWeight: 800,
+          }}
+          >
+            Dashboard
           </Button>
         </Toolbar>
       </AppBar>
@@ -391,9 +400,9 @@ export default function App() {
               onClick={createList}
               startIcon={<AddIcon />}
               sx={{
-                bgcolor: theme.red,
+                bgcolor: theme.primary,
                 fontWeight: 800,
-                "&:hover": { bgcolor: theme.redHover },
+                "&:hover": { bgcolor: theme.primaryHover },
               }}
             >
               Add
@@ -486,7 +495,7 @@ export default function App() {
                 </Typography>
                 {overdueTasks.length === 0 ? (
                   <Typography sx={{ color: theme.subText, fontSize: 14 }}>
-                    Nothing overdue 🎉
+                    Nothing overdue
                   </Typography>
                 ) : (
                   overdueTasks.slice(0, 5).map((t) => (
@@ -547,9 +556,9 @@ export default function App() {
               variant="contained"
               onClick={goLists}
               sx={{
-                bgcolor: theme.red,
+                bgcolor: theme.primary,
                 fontWeight: 900,
-                "&:hover": { bgcolor: theme.redHover },
+                "&:hover": { bgcolor: theme.primaryHover },
               }}
             >
               Go to Lists
@@ -573,9 +582,9 @@ export default function App() {
                     variant="contained"
                     onClick={goLists}
                     sx={{
-                      bgcolor: theme.red,
+                      bgcolor: theme.primary,
                       fontWeight: 900,
-                      "&:hover": { bgcolor: theme.redHover },
+                      "&:hover": { bgcolor: theme.primaryHover },
                     }}
                   >
                     Create a List
@@ -584,8 +593,8 @@ export default function App() {
               </Card>
             ) : (
               <>
-                <Typography variant="h6" sx={{ fontWeight: 900, mb: 2, color: theme.text }}>
-                  {selectedListName ? `${selectedListName} List` : "Choose a list"}
+                <Typography variant="h5" sx={{ fontWeight: 900, mb: 2, color: theme.text }}>
+                  {selectedListName ? `${selectedListName}` : "Choose a list"}
                 </Typography>
 
                 <Card sx={{ mb: 2, bgcolor: theme.card }}>
@@ -640,9 +649,9 @@ export default function App() {
                         startIcon={<AddIcon />}
                         disabled={!selectedListId}
                         sx={{
-                          bgcolor: theme.red,
+                          bgcolor: theme.primary,
                           fontWeight: 900,
-                          "&:hover": { bgcolor: theme.redHover },
+                          "&:hover": { bgcolor: theme.primaryHover },
                         }}
                       >
                         Add
@@ -658,19 +667,19 @@ export default function App() {
                         label="All"
                         clickable
                         onClick={() => setFilter("all")}
-                        color={filter === "all" ? "error" : "default"}
+                        color={filter === "all" ? "primary" : "default"}
                       />
                       <Chip
                         label="Active"
                         clickable
                         onClick={() => setFilter("active")}
-                        color={filter === "active" ? "error" : "default"}
+                        color={filter === "all" ? "primary" : "default"}
                       />
                       <Chip
                         label="Completed"
                         clickable
                         onClick={() => setFilter("completed")}
-                        color={filter === "completed" ? "error" : "default"}
+                        color={filter === "all" ? "primary" : "default"}
                       />
                     </Box>
 
@@ -939,9 +948,9 @@ export default function App() {
                   variant="contained"
                   onClick={clearAllData}
                   sx={{
-                    bgcolor: theme.red,
+                    bgcolor: theme.primary,
                     fontWeight: 900,
-                    "&:hover": { bgcolor: theme.redHover },
+                    "&:hover": { bgcolor: theme.primaryHover },
                   }}
                 >
                   Reset Everything
@@ -979,7 +988,7 @@ export default function App() {
         color: darkMode ? "#aaaaaa" : "#666666",
       },
       "& .Mui-selected": {
-        color: theme.red,
+        color: theme.primary,
       },
     }}
     >
