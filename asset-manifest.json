@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/BrengeToDo/static/css/main.8beb4956.css",
+    "main.js": "/BrengeToDo/static/js/main.1a1bf203.js",
+    "index.html": "/BrengeToDo/index.html",
+    "main.8beb4956.css.map": "/BrengeToDo/static/css/main.8beb4956.css.map",
+    "main.1a1bf203.js.map": "/BrengeToDo/static/js/main.1a1bf203.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8beb4956.css",
+    "static/js/main.1a1bf203.js"
+  ]
+}
