@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import EditIcon from "@mui/icons-material/Edit";
 import {
   AppBar,
   Toolbar,
@@ -95,6 +96,10 @@ export default function App() {
     }
   });
 
+  const [editingListId, setEditingListId] = useState(null);
+  const [editingListName, setEditingListName] = useState("");
+
+
   // Page = Home / Tasks / Profile
   const [page, setPage] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -106,6 +111,26 @@ export default function App() {
       return "tasks";
     }
   });
+
+  function startEditingList(list) {
+  setEditingListId(list.id);
+  setEditingListName(list.name);
+}
+
+  function saveEditedListName() {
+  if (!editingListId) return;
+  if (editingListName.trim() === "") return;
+
+  setLists(
+    lists.map((l) =>
+      l.id === editingListId ? { ...l, name: editingListName.trim() } : l
+    )
+  );
+
+  setEditingListId(null);
+  setEditingListName("");
+}
+
 
   // Dark mode
   const [darkMode, setDarkMode] = useState(() => {
@@ -418,41 +443,77 @@ export default function App() {
             </Typography>
           ) : (
             <List dense>
-              {lists.map((list) => (
-                <ListItem
-                  key={list.id}
-                  disablePadding
-                  secondaryAction={
-                    <IconButton edge="end" onClick={() => deleteList(list.id)} title="Delete list">
-                      <DeleteIcon sx={{ color: theme.subText }} />
-                    </IconButton>
-                  }
-                >
-                  <ListItemButton
-                    selected={selectedListId === list.id}
-                    onClick={() => {
-                      setSelectedListId(list.id);
-                      setDrawerOpen(false);
-                      setExpandedTaskId(null);
-                      setPage("tasks");
-                      setNavValue(1);
-                    }}
-                    sx={{
-                      borderRadius: 2,
-                      mb: 0.5,
-                      color: theme.text,
-                      "&.Mui-selected": {
-                        bgcolor: darkMode ? "#2b2b2b" : "#eaeaea",
-                      },
-                    }}
-                  >
-                    <ListItemText primary={list.name} />
-                    <Badge color="error" badgeContent={countRemainingForList(list.id)} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          )}
+            {lists.map((list) => (
+            <ListItem
+            key={list.id}
+            disablePadding
+            secondaryAction={
+              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+          {/* Edit button */}
+          <IconButton
+          edge="end"
+          onClick={() => startEditingList(list)}
+          title="Rename list"
+              >
+          <EditIcon sx={{ color: theme?.subText || "#777" }} />
+        </IconButton>
+
+        {/* Delete button */}
+        <IconButton
+          edge="end"
+          onClick={() => deleteList(list.id)}
+          title="Delete list"
+        >
+          <DeleteIcon sx={{ color: theme?.subText || "#777" }} />
+        </IconButton>
+      </Box>
+    }
+  >
+    <ListItemButton
+      selected={selectedListId === list.id}
+      onClick={() => {
+        setSelectedListId(list.id);
+        setDrawerOpen(false);
+        setExpandedTaskId(null);
+        setPage("tasks");
+        setNavValue(1);
+      }}
+      sx={{
+        borderRadius: 2,
+        mb: 0.5,
+        "&.Mui-selected": {
+          bgcolor: darkMode ? "#2b2b2b" : "#eaeaea",
+        },
+      }}
+    >
+      {/* If editing this list, show TextField */}
+      {editingListId === list.id ? (
+        <TextField
+          size="small"
+          value={editingListName}
+          onChange={(e) => setEditingListName(e.target.value)}
+          autoFocus
+          onBlur={saveEditedListName}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") saveEditedListName();
+            if (e.key === "Escape") {
+              setEditingListId(null);
+              setEditingListName("");
+            }
+          }}
+          sx={{
+            flex: 1,
+            input: { color: theme?.text || "#111" },
+          }}
+        />
+      ) : (
+        <ListItemText primary={list.name} />
+      )}
+
+          <Badge color="primary" badgeContent={countRemainingForList(list.id)} />
+          </ListItemButton>
+          </ListItem>
+        )))}
 
           <Divider sx={{ mt: 2, borderColor: theme.border }} />
 
